@@ -1,4 +1,4 @@
-# Raya Arena — 50-feature implementation plan
+# NovaCore — 50-feature implementation plan
 
 Target: Geometry Dash Android 2.2081 / Geode 5.6.1.
 
@@ -63,7 +63,7 @@ Status legend:
 46. [ ] Show current level ID/name
 47. [ ] Show player coordinates (where supported)
 48. [ ] Hook/feature diagnostics panel
-49. [ ] Safe mode to disable all Raya hooks
+49. [ ] Safe mode to disable all NovaCore hooks
 50. [ ] Android compatibility report
 
 ## Completion policy
