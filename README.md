@@ -1,28 +1,24 @@
-# Raya Arena — Geode mod
+# Raya Arena — Geode Android mod
 
-Android target: Geometry Dash **2.2081**, Geode **v5.6.1**.
+Target: Geometry Dash **2.2081**, Geode **v5.6.1**.
 
-This repository is initialized using the official Geode example-mod project structure.
+## Current branch status
 
-## Implemented in v0.1.0
+This is an early development branch, not a finished cheat menu and not yet a verified installable package.
 
-- Adds a Raya button to the main menu.
-- Shows a status panel.
-- Provides Geode mod settings for enabling a bounded gameplay update-delta multiplier and choosing its value.
+Implemented in source (not device-verified):
+- Main-menu RAYA button and informational panel.
+- A Geode setting to enable a bounded update-delta speed multiplier and configure its value.
 
-## Not implemented yet
+Not implemented: FPS overlay, practice tools, StartPos switching, hitboxes, noclip, and the rest of the planned functions. No placeholder toggles are presented as working features.
 
-FPS overlay, practice tools, StartPos switching, hitbox rendering and noclip are not implemented in this initial foundation. They must not be treated as working features.
+See [FEATURES.md](FEATURES.md) for the prioritized 50-feature scope and honest status checklist.
 
 ## Build
 
-Use a computer with the Geode CLI, the matching Geode SDK, and Android NDK installed. Then run:
+Use the Geode CLI, Android NDK and SDK matching the target. Run `geode build` on a configured development computer. GitHub Actions is configured to build Android64 and upload the resulting `.geode` only if compilation succeeds.
 
-```sh
-geode build
-```
-
-The official GitHub Actions workflow in `.github/workflows/build-android.yml` also attempts to build an Android64 `.geode` package. The generated package is available as a workflow artifact only after the build succeeds.
+**The current Actions run failed**, so there is no valid package to install yet. Check the workflow at https://github.com/Sfj3861/Raya-Arena/actions and fix build errors before distributing the mod.
 
 References:
 - https://github.com/geode-sdk/example-mod
