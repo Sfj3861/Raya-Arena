@@ -19,4 +19,12 @@ if (NOT DEFINED ENV{GEODE_SDK})
 endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
+
+# Geode's generated bindings currently fail to compile as a Unity translation unit
+# for GD 2.2081 (SequenceTriggerState is incomplete in the merged source).
+# Compile the bindings as normal translation units to avoid include-order collisions.
+if (TARGET GeodeBindings)
+    set_target_properties(GeodeBindings PROPERTIES UNITY_BUILD OFF)
+endif()
+
 setup_geode_mod(${PROJECT_NAME})
