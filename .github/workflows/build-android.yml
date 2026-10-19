@@ -1,0 +1,44 @@
+name: Build NovaCore binaries
+
+on:
+  push:
+    branches: [main, nova-menu-initial]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build ${{ matrix.platform.name }}
+    runs-on: ${{ matrix.platform.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - name: Android 64-bit (.so)
+            target: Android64
+            os: ubuntu-latest
+            artifact: nova-core-android64
+          - name: Windows 64-bit (.dll)
+            target: Win64
+            os: windows-latest
+            artifact: nova-core-win64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Geode mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          target: ${{ matrix.platform.target }}
+          sdk: given
+          path: ./
+
+      - name: Upload package and native binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform.artifact }}
+          path: |
+            **/*.geode
+            **/*.so
+            **/*.dll
+          if-no-files-found: error

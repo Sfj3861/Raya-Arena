@@ -1,0 +1,1 @@
+NovaCore is a cross-platform Geometry Dash Geode utility mod targeting GD 2.2081 and Geode 5.6.1. Early development; features are documented honestly and must be built and tested before being marked complete.
