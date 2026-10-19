@@ -4,11 +4,11 @@
     "android": "2.2081",
     "win": "2.2081"
   },
-  "id": "sfj3861.raya-arena",
-  "name": "Raya Arena",
+  "id": "sfj3861.novacore",
+  "name": "NovaCore",
   "version": "v0.1.0",
   "developer": "Sfj3861",
-  "description": "Android-first Geometry Dash utility mod. Early development build.",
+  "description": "Cross-platform Geometry Dash utility mod. Early development build.",
   "settings": {
     "speedhack-enabled": {
       "name": "Enable speed multiplier",
