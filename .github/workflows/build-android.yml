@@ -1,4 +1,4 @@
-name: Build Raya Arena binaries
+name: Build NovaCore binaries
 
 on:
   push:
@@ -17,11 +17,11 @@ jobs:
           - name: Android 64-bit (.so)
             target: Android64
             os: ubuntu-latest
-            artifact: raya-arena-android64
+            artifact: nova-core-android64
           - name: Windows 64-bit (.dll)
             target: Win64
             os: windows-latest
-            artifact: raya-arena-win64
+            artifact: nova-core-win64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
