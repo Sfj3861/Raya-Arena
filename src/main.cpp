@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/PlayLayer.hpp>
+#include <algorithm>
 
 using namespace geode::prelude;
 
@@ -32,7 +33,7 @@ class $modify(RayaArenaMenuLayer, MenuLayer) {
 
     void onRayaArena(CCObject*) {
         auto enabled = Mod::get()->getSettingValue<bool>("speedhack-enabled");
-        auto multiplier = Mod::get()->getSettingValue<double>("speed-multiplier");
+        auto multiplier = Mod::get()->getSettingValue<float>("speed-multiplier");
 
         FLAlertLayer::create(
             "Raya Arena",
@@ -55,7 +56,7 @@ class $modify(RayaArenaPlayLayer, PlayLayer) {
         if (Mod::get()->getSettingValue<bool>("speedhack-enabled")) {
             auto multiplier = Mod::get()->getSettingValue<double>("speed-multiplier");
             // Bound the value even if the settings file was edited manually.
-            multiplier = std::clamp(multiplier, 0.5, 2.0);
+            multiplier = std::clamp(multiplier, 0.5f, 2.0f);
             PlayLayer::update(static_cast<float>(dt * multiplier));
             return;
         }
