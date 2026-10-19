@@ -54,7 +54,7 @@ class $modify(RayaArenaMenuLayer, MenuLayer) {
 class $modify(RayaArenaPlayLayer, PlayLayer) {
     void update(float dt) {
         if (Mod::get()->getSettingValue<bool>("speedhack-enabled")) {
-            auto multiplier = Mod::get()->getSettingValue<double>("speed-multiplier");
+            auto multiplier = Mod::get()->getSettingValue<float>("speed-multiplier");
             // Bound the value even if the settings file was edited manually.
             multiplier = std::clamp(multiplier, 0.5f, 2.0f);
             PlayLayer::update(static_cast<float>(dt * multiplier));
