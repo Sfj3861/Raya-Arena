@@ -1,4 +1,4 @@
-name: Build Geode Android mod
+name: Build Raya Arena binaries
 
 on:
   push:
@@ -7,8 +7,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-android64:
-    runs-on: ubuntu-latest
+  build:
+    name: Build ${{ matrix.platform.name }}
+    runs-on: ${{ matrix.platform.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - name: Android 64-bit (.so)
+            target: Android64
+            os: ubuntu-latest
+            artifact: raya-arena-android64
+          - name: Windows 64-bit (.dll)
+            target: Win64
+            os: windows-latest
+            artifact: raya-arena-win64
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -16,13 +29,16 @@ jobs:
       - name: Build Geode mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          target: Android64
+          target: ${{ matrix.platform.target }}
           sdk: given
           path: ./
 
-      - name: Upload .geode package
+      - name: Upload package and native binary
         uses: actions/upload-artifact@v4
         with:
-          name: raya-arena-android64
-          path: "**/*.geode"
+          name: ${{ matrix.platform.artifact }}
+          path: |
+            **/*.geode
+            **/*.so
+            **/*.dll
           if-no-files-found: error
