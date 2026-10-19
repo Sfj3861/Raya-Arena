@@ -5,9 +5,8 @@
 
 using namespace geode::prelude;
 
-// This is intentionally a small, buildable foundation. Options not yet
-// implemented are not presented as working cheats.
-class $modify(RayaArenaMenuLayer, MenuLayer) {
+// Small foundation; options not implemented yet are not presented as working.
+class $modify(NovaCoreMenuLayer, MenuLayer) {
     bool init() {
         if (!MenuLayer::init()) {
             return false;
@@ -15,30 +14,30 @@ class $modify(RayaArenaMenuLayer, MenuLayer) {
 
         auto menu = this->getChildByID("bottom-menu");
         if (!menu) {
-            log::warn("Raya Arena: bottom-menu node was not found.");
+            log::warn("NovaCore: bottom-menu node was not found.");
             return true;
         }
 
         auto sprite = ButtonSprite::create(
-            "RAYA", 40, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.7f
+            "NOVA", 40, true, "goldFont.fnt", "GJ_button_01.png", 25.f, 0.7f
         );
         auto button = CCMenuItemSpriteExtra::create(
-            sprite, this, menu_selector(RayaArenaMenuLayer::onRayaArena)
+            sprite, this, menu_selector(NovaCoreMenuLayer::onNovaCore)
         );
-        button->setID("raya-arena-button"_spr);
+        button->setID("nova-core-button"_spr);
         menu->addChild(button);
         menu->updateLayout();
         return true;
     }
 
-    void onRayaArena(CCObject*) {
+    void onNovaCore(CCObject*) {
         auto enabled = Mod::get()->getSettingValue<bool>("speedhack-enabled");
         auto multiplier = Mod::get()->getSettingValue<float>("speed-multiplier");
 
         FLAlertLayer::create(
-            "Raya Arena",
+            "NovaCore",
             fmt::format(
-                "Raya Arena v0.1.0\n\n"
+                "NovaCore v0.1.0\n\n"
                 "Speed multiplier: {}\n"
                 "Configured value: {:.2f}x\n\n"
                 "Change these values in Geode's mod settings.\n"
@@ -51,11 +50,10 @@ class $modify(RayaArenaMenuLayer, MenuLayer) {
     }
 };
 
-class $modify(RayaArenaPlayLayer, PlayLayer) {
+class $modify(NovaCorePlayLayer, PlayLayer) {
     void update(float dt) {
         if (Mod::get()->getSettingValue<bool>("speedhack-enabled")) {
             auto multiplier = Mod::get()->getSettingValue<float>("speed-multiplier");
-            // Bound the value even if the settings file was edited manually.
             multiplier = std::clamp(multiplier, 0.5f, 2.0f);
             PlayLayer::update(static_cast<float>(dt * multiplier));
             return;
